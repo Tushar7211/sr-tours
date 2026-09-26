@@ -63,7 +63,12 @@ function Hero({ c, rides, wa }) {
         <p className="lead">{hero.subtitle}</p>
         <div className="cta-row">
           <a className="btn btn-sun" href="#enquiry">{hero.cta}</a>
-          <a className="btn btn-wa" href={wa(`Hello ${brand.name}, I would like to plan a trip.`)} target="_blank" rel="noreferrer">
+          <a
+            className="btn btn-wa"
+            href={wa(`Hello ${brand.name}, I would like to plan a trip.`)}
+            target="_blank"
+            rel="noreferrer"
+          >
             <Icon name="chat" size={18} /> WhatsApp
           </a>
           <a className="btn btn-line" href={telLink(contact.phone)}>
@@ -120,7 +125,10 @@ function Destinations({ c, items, wa }) {
   const inRegion = items.filter((p) => p.region === region);
   const tags = ['All', ...new Set(inRegion.flatMap((p) => splitTags(p.tags)))];
   const list = tag === 'All' ? inRegion : inRegion.filter((p) => splitTags(p.tags).includes(tag));
-  const pick = (r) => { setRegion(r); setTag('All'); };
+  const pick = (r) => {
+    setRegion(r);
+    setTag('All');
+  };
 
   return (
     <section className="section" id="destinations">
@@ -128,43 +136,74 @@ function Destinations({ c, items, wa }) {
         <SectionHead t={c.titles.packages} brand={c.brand} plate="sun" />
 
         <div className="regions" role="tablist">
-          <button role="tab" aria-selected={region === 'odisha'} className={region === 'odisha' ? 'on' : ''} onClick={() => pick('odisha')}>
+          <button
+            role="tab"
+            aria-selected={region === 'odisha'}
+            className={region === 'odisha' ? 'on' : ''}
+            onClick={() => pick('odisha')}
+          >
             🛕 Odisha tour packages
           </button>
-          <button role="tab" aria-selected={region === 'india'} className={region === 'india' ? 'on' : ''} onClick={() => pick('india')}>
+          <button
+            role="tab"
+            aria-selected={region === 'india'}
+            className={region === 'india' ? 'on' : ''}
+            onClick={() => pick('india')}
+          >
             🗺️ Out of Odisha tour packages
           </button>
         </div>
 
         <div className="filters">
           {tags.map((x) => (
-            <button key={x} className={tag === x ? 'on' : ''} onClick={() => setTag(x)}>{x}</button>
+            <button key={x} className={tag === x ? 'on' : ''} onClick={() => setTag(x)}>
+              {x}
+            </button>
           ))}
         </div>
 
         {list.length === 0 ? (
-          <p className="empty">Packages for this region are coming soon. Call us and we will plan one for you.</p>
+          <p className="empty">
+            Packages for this region are coming soon. Call us and we will plan one for you.
+          </p>
         ) : (
           <div className="tiles">
             {list.map((p, i) => (
               <article className="tile" key={p.id}>
                 <div className={`tile-img g${i % 6}`}>
                   {p.image ? (
-                    <img src={safeUrl(p.image)} alt={p.name} loading="lazy" onError={(e) => { e.currentTarget.style.display = 'none'; }} />
+                    <img
+                      src={safeUrl(p.image)}
+                      alt={p.name}
+                      loading="lazy"
+                      onError={(e) => {
+                        e.currentTarget.style.display = 'none';
+                      }}
+                    />
                   ) : (
-                    <span className="tile-emoji" aria-hidden="true">{p.emoji || '📍'}</span>
+                    <span className="tile-emoji" aria-hidden="true">
+                      {p.emoji || '📍'}
+                    </span>
                   )}
                   {p.duration && <span className="tile-tag">{p.duration}</span>}
                 </div>
+
                 <div className="tile-cap">
                   <h3>{p.name}</h3>
                   {p.subtitle && <span>{p.subtitle}</span>}
                 </div>
+
                 <div className="tile-body">
                   {p.description && <p>{p.description}</p>}
                   <div className="tile-foot">
                     <b>{p.price || 'Ask for a quote'}</b>
-                    <a href={wa(`Hello ${c.brand.name}, I am interested in the ${p.name} package.`)} target="_blank" rel="noreferrer">Enquire</a>
+                    <a
+                      href={wa(`Hello ${c.brand.name}, I am interested in the ${p.name} package.`)}
+                      target="_blank"
+                      rel="noreferrer"
+                    >
+                      Enquire
+                    </a>
                   </div>
                 </div>
               </article>
@@ -186,7 +225,10 @@ function Why({ c }) {
           {c.features.map((f) => (
             <li key={f.id}>
               <span className="perk-ico" aria-hidden="true">{f.icon}</span>
-              <div><h3>{f.title}</h3><p>{f.desc}</p></div>
+              <div>
+                <h3>{f.title}</h3>
+                <p>{f.desc}</p>
+              </div>
             </li>
           ))}
         </ul>
@@ -200,9 +242,19 @@ function Offer({ c, wa }) {
   return (
     <section className="offer">
       <div className="container offer-in">
-        <div className="badge"><span aria-hidden="true">👨‍👩‍👧‍👦</span><b>{o.title}</b></div>
+        <div className="badge">
+          <span aria-hidden="true">👨‍👩‍👧‍👦</span>
+          <b>{o.title}</b>
+        </div>
         <p>{o.text}</p>
-        <a className="btn btn-navy" href={wa(`Hello ${c.brand.name}, I would like a group or family quote.`)} target="_blank" rel="noreferrer">{o.cta}</a>
+        <a
+          className="btn btn-navy"
+          href={wa(`Hello ${c.brand.name}, I would like a group or family quote.`)}
+          target="_blank"
+          rel="noreferrer"
+        >
+          {o.cta}
+        </a>
       </div>
     </section>
   );
@@ -217,13 +269,19 @@ function Services({ c, wa }) {
           <h2>{fill(t.title, c.brand)}</h2>
           {t.sub && <p>{t.sub}</p>}
           <a className="bigphone" href={wa('')} target="_blank" rel="noreferrer">
-            <Icon name="chat" size={30} /><span>{c.contact.phone}</span>
+            <Icon name="chat" size={30} />
+            <span>{c.contact.phone}</span>
           </a>
         </div>
+
         <ul className="svc-list">
           {c.services.map((s) => (
             <li key={s.id}>
-              <a href={wa(`Hello ${c.brand.name}, I need help with ${s.title}.`)} target="_blank" rel="noreferrer">
+              <a
+                href={wa(`Hello ${c.brand.name}, I need help with ${s.title}.`)}
+                target="_blank"
+                rel="noreferrer"
+              >
                 <span className="svc-ico" aria-hidden="true">{s.icon}</span>
                 <b>{s.title}</b>
                 <small>{s.desc}</small>
@@ -242,11 +300,45 @@ function Reviews({ c }) {
       <div className="container">
         <SectionHead t={c.titles.reviews} brand={c.brand} plate="sun" />
         <div className="quotes">
-          {c.testimonials.map((r) => (
-            <blockquote key={r.id}>
-              <p>{r.text}</p>
-              <footer><b>{r.name}</b>{r.place && <span>{r.place}</span>}</footer>
-            </blockquote>
+          {c.testimonials.filter((r) => r.visible !== false).map((r) => (
+            <figure className="quote" key={r.id}>
+              <blockquote>{r.text}</blockquote>
+              <figcaption>
+                {r.photo ? (
+                  <img
+                    className="quote-photo"
+                    src={safeUrl(r.photo)}
+                    alt={r.name}
+                    loading="lazy"
+                    onError={(e) => {
+                      e.currentTarget.style.display = 'none';
+                    }}
+                  />
+                ) : (
+                  <span className="quote-avatar" aria-hidden="true">
+                    {(r.name || '?').trim().slice(0, 1).toUpperCase()}
+                  </span>
+                )}
+
+                <span className="quote-who">
+                  <b>{r.name}</b>
+                  {r.place && <span className="quote-place">{r.place}</span>}
+                </span>
+
+                {r.rating && (
+                  <span
+                    className="quote-stars"
+                    aria-label={`${r.rating} out of 5 stars`}
+                  >
+                    {Array.from({ length: 5 }, (_, i) => (
+                      <span key={i} className={i < Number(r.rating) ? 'on' : ''}>
+                        <Icon name="star" size={14} />
+                      </span>
+                    ))}
+                  </span>
+                )}
+              </figcaption>
+            </figure>
           ))}
         </div>
       </div>
@@ -264,30 +356,62 @@ function ContactItems({ c, wa }) {
     k.address && ['pin', 'Address', k.address],
     k.hours && ['clock', 'Support', k.hours],
   ].filter(Boolean);
+
   return rows.map(([icon, label, text, href]) => (
     <li key={label}>
-      <span className="ico"><Icon name={icon} size={18} /></span>
+      <span className="ico">
+        <Icon name={icon} size={18} />
+      </span>
       <span>
         <small>{label}</small>
-        {href ? <a href={href} {...(href.startsWith('http') ? { target: '_blank', rel: 'noreferrer' } : {})}>{text}</a> : <b>{text}</b>}
+        {href ? (
+          <a
+            href={href}
+            {...(href.startsWith('http')
+              ? { target: '_blank', rel: 'noreferrer' }
+              : {})}
+          >
+            {text}
+          </a>
+        ) : (
+          <b>{text}</b>
+        )}
       </span>
     </li>
   ));
 }
 
 function Enquiry({ c, vehicles, packages, wa }) {
-  const empty = { name: '', phone: '', from: '', to: '', date: '', pax: '', vehicle: '', note: '' };
+  const empty = {
+    name: '',
+    phone: '',
+    from: '',
+    to: '',
+    date: '',
+    pax: '',
+    vehicle: '',
+    note: '',
+  };
+
   const [f, setF] = useState(empty);
   const [err, setErr] = useState('');
-  const set = (k) => (e) => setF((prev) => ({ ...prev, [k]: e.target.value }));
+
+  const set = (k) => (e) =>
+    setF((prev) => ({
+      ...prev,
+      [k]: e.target.value,
+    }));
 
   const submit = (e) => {
     e.preventDefault();
+
     if (!f.name.trim() || digits(f.phone).length < 10) {
       setErr('Please enter your name and a 10-digit phone number.');
       return;
     }
+
     setErr('');
+
     const lines = [
       `Hello ${c.brand.name}, I would like to enquire about a trip.`,
       `Name: ${f.name}`,
@@ -299,6 +423,7 @@ function Enquiry({ c, vehicles, packages, wa }) {
       f.vehicle && `Vehicle: ${f.vehicle}`,
       f.note && `Message: ${f.note}`,
     ].filter(Boolean);
+
     window.open(wa(lines.join('\n')), '_blank', 'noopener');
   };
 
@@ -308,33 +433,107 @@ function Enquiry({ c, vehicles, packages, wa }) {
         <div className="enq-info">
           <h2>{c.titles.enquiry.title}</h2>
           {c.titles.enquiry.sub && <p>{c.titles.enquiry.sub}</p>}
-          <ul className="contact-list"><ContactItems c={c} wa={wa} /></ul>
+          <ul className="contact-list">
+            <ContactItems c={c} wa={wa} />
+          </ul>
         </div>
 
         <form className="form" onSubmit={submit} noValidate>
           <div className="form-grid">
-            <label>Your name<input value={f.name} onChange={set('name')} autoComplete="name" required /></label>
-            <label>Phone number<input value={f.phone} onChange={set('phone')} inputMode="tel" autoComplete="tel" required /></label>
-            <label>Travelling from<input value={f.from} onChange={set('from')} placeholder="e.g. Bhubaneswar" /></label>
+            <label>
+              Your name
+              <input
+                value={f.name}
+                onChange={set('name')}
+                autoComplete="name"
+                required
+              />
+            </label>
+
+            <label>
+              Phone number
+              <input
+                value={f.phone}
+                onChange={set('phone')}
+                inputMode="tel"
+                autoComplete="tel"
+                required
+              />
+            </label>
+
+            <label>
+              Travelling from
+              <input
+                value={f.from}
+                onChange={set('from')}
+                placeholder="e.g. Bhubaneswar"
+              />
+            </label>
+
             <label>
               Where to?
-              <input value={f.to} onChange={set('to')} list="dest-list" placeholder="Pick or type a place" />
-              <datalist id="dest-list">{packages.map((p) => <option key={p.id} value={p.name} />)}</datalist>
+              <input
+                value={f.to}
+                onChange={set('to')}
+                list="dest-list"
+                placeholder="Pick or type a place"
+              />
+              <datalist id="dest-list">
+                {packages.map((p) => (
+                  <option key={p.id} value={p.name} />
+                ))}
+              </datalist>
             </label>
-            <label>Travel date<input type="date" value={f.date} onChange={set('date')} /></label>
-            <label>Number of travellers<input value={f.pax} onChange={set('pax')} inputMode="numeric" /></label>
+
+            <label>
+              Travel date
+              <input
+                type="date"
+                value={f.date}
+                onChange={set('date')}
+              />
+            </label>
+
+            <label>
+              Number of travellers
+              <input
+                value={f.pax}
+                onChange={set('pax')}
+                inputMode="numeric"
+              />
+            </label>
+
             <label className="full">
               Preferred vehicle
               <select value={f.vehicle} onChange={set('vehicle')}>
                 <option value="">Not sure yet</option>
-                {vehicles.map((v) => <option key={v.id} value={v.name}>{v.name}</option>)}
+                {vehicles.map((v) => (
+                  <option key={v.id} value={v.name}>
+                    {v.name}
+                  </option>
+                ))}
               </select>
             </label>
-            <label className="full">Anything else?<textarea rows={3} value={f.note} onChange={set('note')} /></label>
+
+            <label className="full">
+              Anything else?
+              <textarea
+                rows={3}
+                value={f.note}
+                onChange={set('note')}
+              />
+            </label>
           </div>
+
           {err && <p className="err" role="alert">{err}</p>}
-          <button className="btn btn-wa btn-lg" type="submit"><Icon name="chat" size={20} /> Send on WhatsApp</button>
-          <p className="fine">This opens WhatsApp with your details filled in, ready to send.</p>
+
+          <button className="btn btn-wa btn-lg" type="submit">
+            <Icon name="chat" size={20} /> Send on WhatsApp
+          </button>
+
+          <p className="fine">
+            This opens WhatsApp with your details filled in, ready to send.
+          </p>
         </form>
       </div>
     </section>
@@ -343,32 +542,59 @@ function Enquiry({ c, vehicles, packages, wa }) {
 
 function Footer({ c, links, wa }) {
   const { brand, contact: k } = c;
-  const socials = [['instagram', k.instagram], ['facebook', k.facebook], ['youtube', k.youtube]].filter((s) => s[1]);
+  const socials = [
+    ['instagram', k.instagram],
+    ['facebook', k.facebook],
+    ['youtube', k.youtube],
+  ].filter((s) => s[1]);
+
   return (
     <footer className="footer">
       <div className="container foot-grid">
         <div>
           <Logo brand={brand} />
           <p className="foot-motto">{brand.motto}</p>
+
           {socials.length > 0 && (
             <div className="social">
               {socials.map(([name, url]) => (
-                <a key={name} href={safeUrl(url)} target="_blank" rel="noreferrer" aria-label={name}><Icon name={name} size={18} /></a>
+                <a
+                  key={name}
+                  href={safeUrl(url)}
+                  target="_blank"
+                  rel="noreferrer"
+                  aria-label={name}
+                >
+                  <Icon name={name} size={18} />
+                </a>
               ))}
             </div>
           )}
         </div>
+
         <div>
           <h4>Explore</h4>
-          <ul className="flinks">{links.map(([id, label]) => <li key={id}><a href={`#${id}`}>{label}</a></li>)}</ul>
+          <ul className="flinks">
+            {links.map(([id, label]) => (
+              <li key={id}>
+                <a href={`#${id}`}>{label}</a>
+              </li>
+            ))}
+          </ul>
         </div>
+
         <div>
           <h4>Contact</h4>
-          <ul className="contact-list"><ContactItems c={c} wa={wa} /></ul>
+          <ul className="contact-list">
+            <ContactItems c={c} wa={wa} />
+          </ul>
         </div>
       </div>
+
       <div className="container copy">
-        <span>© {new Date().getFullYear()} {brand.name}. All rights reserved.</span>
+        <span>
+          © {new Date().getFullYear()} {brand.name}. All rights reserved.
+        </span>
         <span>{brand.tagline}</span>
       </div>
     </footer>
@@ -378,23 +604,49 @@ function Footer({ c, links, wa }) {
 /* ---------------------------------------------------------------------- page */
 export default function Landing() {
   // Show the last published copy instantly on repeat visits, then refresh it.
-  const [c, setC] = useState(() => { const cached = getCached(); return cached ? withDefaults(cached) : null; });
+  const [c, setC] = useState(() => {
+    const cached = getCached();
+    return cached ? withDefaults(cached) : null;
+  });
 
   useEffect(() => {
     let alive = true;
-    const giveUp = setTimeout(() => alive && setC((cur) => cur || withDefaults(null)), 3500);
-    fetchContent().then((r) => { if (alive) setC(r.content); });
-    return () => { alive = false; clearTimeout(giveUp); };
+
+    const giveUp = setTimeout(
+      () => alive && setC((cur) => cur || withDefaults(null)),
+      3500
+    );
+
+    fetchContent().then((r) => {
+      if (alive) setC(r.content);
+    });
+
+    return () => {
+      alive = false;
+      clearTimeout(giveUp);
+    };
   }, []);
 
-  useEffect(() => { if (c) document.title = `${c.brand.name} – ${c.brand.tagline}`; }, [c]);
+  useEffect(() => {
+    if (c) document.title = `${c.brand.name} – ${c.brand.tagline}`;
+  }, [c]);
 
-  if (!c) return <div className="splash"><span className="mark big"><b>S</b><i>R</i></span></div>;
+  if (!c) {
+    return (
+      <div className="splash">
+        <span className="mark big">
+          <b>S</b>
+          <i>R</i>
+        </span>
+      </div>
+    );
+  }
 
   const S = c.sections;
   const wa = (text) => waLink(c.contact.whatsapp || c.contact.phone, text);
   const vehicles = c.vehicles.filter(shown);
   const packages = c.packages.filter(shown);
+
   const links = [
     S.vehicles && vehicles.length > 0 && ['fleet', 'Our cars'],
     S.packages && packages.length > 0 && ['destinations', 'Destinations'],
@@ -405,19 +657,50 @@ export default function Landing() {
 
   return (
     <>
-      {c.announcement.enabled && c.announcement.text && <div className="announce">{c.announcement.text}</div>}
+      {c.announcement.enabled && c.announcement.text && (
+        <div className="announce">{c.announcement.text}</div>
+      )}
+
       <Navbar c={c} links={links} />
+
       <main>
         <Hero c={c} rides={S.vehicles ? vehicles : []} wa={wa} />
-        {S.packages && packages.length > 0 && <Destinations c={c} items={packages} wa={wa} />}
+
+        {S.packages && packages.length > 0 && (
+          <Destinations c={c} items={packages} wa={wa} />
+        )}
+
         {S.features && c.features.length > 0 && <Why c={c} />}
+
         {c.offer.enabled && <Offer c={c} wa={wa} />}
-        {S.services && c.services.length > 0 && <Services c={c} wa={wa} />}
-        {S.reviews && c.testimonials.length > 0 && <Reviews c={c} />}
-        {S.enquiry && <Enquiry c={c} vehicles={vehicles} packages={packages} wa={wa} />}
+
+        {S.services && c.services.length > 0 && (
+          <Services c={c} wa={wa} />
+        )}
+
+        {S.reviews && c.testimonials.length > 0 && (
+          <Reviews c={c} />
+        )}
+
+        {S.enquiry && (
+          <Enquiry
+            c={c}
+            vehicles={vehicles}
+            packages={packages}
+            wa={wa}
+          />
+        )}
       </main>
+
       <Footer c={c} links={links} wa={wa} />
-      <a className="wa-float" href={wa('Hello! I would like to know more about your tour packages.')} target="_blank" rel="noreferrer" aria-label="Chat on WhatsApp">
+
+      <a
+        className="wa-float"
+        href={wa('Hello! I would like to know more about your tour packages.')}
+        target="_blank"
+        rel="noreferrer"
+        aria-label="Chat on WhatsApp"
+      >
         <Icon name="chat" size={28} />
       </a>
     </>

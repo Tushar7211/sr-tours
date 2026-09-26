@@ -89,8 +89,11 @@ const F = {
   ],
   review: [
     { key: 'name', label: 'Customer name' },
-    { key: 'place', label: 'City or trip (optional)' },
+    { key: 'place', label: 'City or trip (optional)', hint: 'e.g. Puri family trip' },
     { key: 'text', label: 'What they said', type: 'textarea' },
+    { key: 'rating', label: 'Rating', type: 'select', options: [{ value: '', label: 'No rating shown' }, { value: '5', label: '★★★★★ 5 out of 5' }, { value: '4', label: '★★★★ 4 out of 5' }, { value: '3', label: '★★★ 3 out of 5' }, { value: '2', label: '★★ 2 out of 5' }, { value: '1', label: '★ 1 out of 5' }] },
+    { key: 'photo', label: 'Customer photo (optional)', hint: IMG_HINT + '. Without one, their initial is shown instead.' },
+    { key: 'visible', label: 'Show on the website', type: 'checkbox' },
   ],
 };
 
@@ -99,7 +102,7 @@ const BLANK = {
   package: { name: '', subtitle: '', region: 'odisha', tags: '', description: '', duration: '', price: '', emoji: '📍', image: '', visible: true },
   feature: { icon: '⭐', title: '', desc: '' },
   service: { icon: '🧳', title: '', desc: '' },
-  review: { name: '', place: '', text: '' },
+  review: { name: '', place: '', text: '', rating: '5', photo: '', visible: true },
 };
 
 const TABS = [
