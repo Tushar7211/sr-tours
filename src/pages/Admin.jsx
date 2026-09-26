@@ -29,6 +29,7 @@ const F = {
     { key: 'features', label: 'Show "Why choose us"', type: 'checkbox' },
     { key: 'services', label: 'Show the services / book now bar', type: 'checkbox' },
     { key: 'reviews', label: 'Show reviews (only appears if you add some)', type: 'checkbox' },
+    { key: 'showcase', label: 'Show the satisfied customers gallery (only appears if you add some)', type: 'checkbox' },
     { key: 'enquiry', label: 'Show the enquiry form and contact details', type: 'checkbox' },
   ],
   contact: [
@@ -95,6 +96,12 @@ const F = {
     { key: 'photo', label: 'Customer photo (optional)', hint: IMG_HINT + '. Without one, their initial is shown instead.' },
     { key: 'visible', label: 'Show on the website', type: 'checkbox' },
   ],
+  showcase: [
+    { key: 'caption', label: 'Caption', hint: 'e.g. Puri family trip with our founder', type: 'textarea' },
+    { key: 'customerPhoto', label: 'Customer photo', hint: IMG_HINT },
+    { key: 'ownerPhoto', label: 'Owner photo', hint: IMG_HINT + '. Shown as a small circle over the customer photo.' },
+    { key: 'visible', label: 'Show on the website', type: 'checkbox' },
+  ],
 };
 
 const BLANK = {
@@ -103,6 +110,7 @@ const BLANK = {
   feature: { icon: '⭐', title: '', desc: '' },
   service: { icon: '🧳', title: '', desc: '' },
   review: { name: '', place: '', text: '', rating: '5', photo: '', visible: true },
+  showcase: { caption: '', customerPhoto: '', ownerPhoto: '', visible: true },
 };
 
 const TABS = [
@@ -114,6 +122,7 @@ const TABS = [
   ['services', '🧳 Services'],
   ['offer', '🎁 Offers & top bar'],
   ['reviews', '💬 Reviews'],
+  ['showcase', '📸 Customer showcase'],
   ['titles', '✏️ Section headings'],
   ['backup', '💾 Backup'],
 ];
@@ -123,6 +132,7 @@ const TITLE_LABELS = {
   features: 'Why choose us section',
   services: 'Services / book now bar',
   reviews: 'Reviews section',
+  showcase: 'Customer showcase section',
   enquiry: 'Enquiry form section',
 };
 
@@ -375,6 +385,12 @@ function Editor({ auth, onLogout }) {
           {tab === 'reviews' && (
             <Panel title="Customer reviews" hint="Only add real reviews. The section stays hidden until you add one.">
               <ListEditor items={draft.testimonials} onChange={setList('testimonials')} fields={F.review} blank={BLANK.review} noun="review" />
+            </Panel>
+          )}
+
+          {tab === 'showcase' && (
+            <Panel title="Satisfied customers gallery" hint="Add a customer photo and a photo of the owner with them. Images are links only, same as everywhere else. The section stays hidden until you add one.">
+              <ListEditor items={draft.showcase} onChange={setList('showcase')} fields={F.showcase} blank={BLANK.showcase} nameKey="caption" noun="photo" />
             </Panel>
           )}
 

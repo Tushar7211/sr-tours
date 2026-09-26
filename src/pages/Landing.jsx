@@ -345,6 +345,45 @@ function Reviews({ c }) {
     </section>
   );
 }
+function Showcase({ c }) {
+  const items = c.showcase.filter((s) => s.visible !== false);
+  if (items.length === 0) return null;
+
+  return (
+    <section className="section showcase" id="showcase">
+      <div className="container">
+        <SectionHead t={c.titles.showcase} brand={c.brand} plate="navy" />
+        <div className="showcase-grid">
+          {items.map((s) => (
+            <figure className="showcase-card" key={s.id}>
+              <div className="showcase-photos">
+                {s.customerPhoto && (
+                  <img
+                    className="showcase-customer"
+                    src={safeUrl(s.customerPhoto)}
+                    alt="Happy customer"
+                    loading="lazy"
+                    onError={(e) => { e.currentTarget.style.display = 'none'; }}
+                  />
+                )}
+                {s.ownerPhoto && (
+                  <img
+                    className="showcase-owner"
+                    src={safeUrl(s.ownerPhoto)}
+                    alt="With the owner"
+                    loading="lazy"
+                    onError={(e) => { e.currentTarget.style.display = 'none'; }}
+                  />
+                )}
+              </div>
+              {s.caption && <figcaption>{s.caption}</figcaption>}
+            </figure>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
 
 /* ------------------------------------------------------------ enquiry + footer */
 function ContactItems({ c, wa }) {
@@ -681,6 +720,9 @@ export default function Landing() {
         {S.reviews && c.testimonials.length > 0 && (
           <Reviews c={c} />
         )}
+        {S.showcase && c.showcase.length > 0 && (
+  <Showcase c={c} />
+)}
 
         {S.enquiry && (
           <Enquiry

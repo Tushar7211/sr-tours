@@ -37,6 +37,7 @@ export const DEFAULT_CONTENT = {
     features: true,
     services: true,
     reviews: true,
+    showcase: true,
     enquiry: true,
   },
 
@@ -52,6 +53,10 @@ export const DEFAULT_CONTENT = {
       title: 'Your next destination is just a call away!',
       sub: "Tell us where you want to go and we'll get back to you with the best price.",
     },
+    showcase: {
+    title: 'Our Satisfied {brand} Customers',
+    sub: 'A few happy moments with travellers we have had the pleasure of serving.',
+  },
   },
 
   vehicles: [
@@ -116,4 +121,5 @@ export const DEFAULT_CONTENT = {
 
   // Add real reviews from the admin page. The section stays hidden while this is empty.
   testimonials: [],
+  showcase: [],
 };
