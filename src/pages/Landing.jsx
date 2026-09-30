@@ -86,14 +86,6 @@ function Hero({ c, rides, wa }) {
       {rides.length > 0 ? (
         <div className="scene">
           <Landscape />
-          <a
-            className="btn btn-line self-drive"
-            href={wa(`Hello ${brand.name}, I am interested in a self-drive car.`)}
-            target="_blank"
-            rel="noreferrer"
-          >
-            <Icon name="chat" size={16} /> Self Drive
-          </a>
           <div className="fleet" id="fleet" style={{ '--n': Math.min(rides.length, 4) }}>
             {rides.map((v, i) => (
               <a
@@ -118,6 +110,14 @@ function Hero({ c, rides, wa }) {
               </a>
             ))}
           </div>
+          <a
+            className="btn btn-line self-drive"
+            href={wa(`Hello ${brand.name}, I am interested in a self-drive car.`)}
+            target="_blank"
+            rel="noreferrer"
+          >
+            <Icon name="chat" size={16} /> Self Drive
+          </a>
         </div>
       ) : (
         <div className="hero-gap" />
