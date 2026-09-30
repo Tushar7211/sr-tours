@@ -200,15 +200,20 @@ p { text-wrap: pretty; }
 }
 
 .hero-gap { height: 48px; }
-.scene { position: relative; margin-top: 30px; padding: 56px 0 26px; }
+.scene { position: relative; margin-top: 30px; padding: 40px 0 92px; } /* extra bottom space so the button never overlaps the cars */
 .scene-art { position: absolute; inset: 0; pointer-events: none; }
 .scene-art svg { display: block; width: 100%; height: 100%; }
 .self-drive {
   position: absolute;
-  top: 12px;
-  right: max(20px, calc((100% - 1160px) / 2));
-  z-index: 3;
+  top: auto;
+  bottom: 24px;
+  left: 0;
+  right: 0;
+  width: max-content;      /* shrink to button size */
+  margin-inline: auto;     /* centres it horizontally */
+  z-index: 5;              /* above the road and car art */
   background: #fff;
+  box-shadow: 0 6px 16px -6px rgba(10, 42, 117, 0.5);
 }
 .fleet {
   position: relative;
